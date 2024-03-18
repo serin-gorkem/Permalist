@@ -24,7 +24,11 @@ let items = [
 ];
 
 app.get("/", async (req, res) => {
-  const result = await pool.query("SELECT * FROM items ORDER BY id ASC") 
+  try {
+    const result = await pool.query("SELECT * FROM items ORDER BY id ASC") 
+  } catch (error) {
+    console.error(error);
+  }
   items = result.rows;
 
   res.render("index.ejs", {
