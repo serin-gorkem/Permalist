@@ -27,15 +27,13 @@ app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM items ORDER BY id ASC") 
     items = result.rows;
-    res.render("index.ejs", {
-      listTitle: "Today",
-      listItems: items,
-    });
   } catch (error) {
     console.error(error);
   }
-
-
+  res.render("index.ejs", {
+    listTitle: "Today",
+    listItems: items,
+  });
 });
 
 app.post("/add", async (req, res) => {
